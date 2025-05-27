@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Dieppe Raid: A Fateful Day</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* bg-gray-900 */
+            color: #F3F4F6; /* text-gray-100 */
+            scroll-behavior: smooth; /* Enables smooth scrolling for anchor links */
+        }
+        .section { /* General class for all content sections */
+            min-height: 80vh;
+            padding: 6rem 2rem; /* Consistent padding */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-section { /* Specific styling for the hero */
+            min-height: 100vh;
+            background: linear-gradient(rgba(17, 24, 39, 0.7), rgba(17, 24, 39, 0.7)), url('https://placehold.co/1920x1080/6B7280/111827?text=Dieppe+Beach+WWII+Colorized+(Placeholder)') no-repeat center center/cover;
+            padding: 8rem 2rem; /* Original hero padding */
+        }
+        .angled-divider {
+            width: 100%;
+            height: 100px;
+            background-color: #1F2937; /* bg-gray-800 */
+            clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);
+            margin-top: -1px; 
+        }
+        .angled-divider-inverted {
+            width: 100%;
+            height: 100px;
+            background-color: #111827; /* bg-gray-900 */
+            clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
+            margin-bottom: -1px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem; 
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .timeline-item::before { 
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0.25rem;
+            bottom: -0.25rem; 
+            width: 2px;
+            background-color: #4B5563; 
+        }
+        .timeline-item:last-child::before {
+            bottom: calc(100% - 1rem); 
+        }
+        .timeline-item::after { 
+            content: '';
+            position: absolute;
+            left: calc(0.5rem - 0.375rem + 1px); 
+            top: 0.25rem;
+            width: 0.75rem;
+            height: 0.75rem;
+            background-color: #F87171; 
+            border-radius: 50%;
+            border: 2px solid #1F2937; /* Match card background if timeline is on a card */
+            z-index: 1;
+        }
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .stat-card {
+            background-color: #1F2937; /* bg-gray-800 */
+            border-left: 4px solid #F87171; /* border-red-400 */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(248, 113, 113, 0.2);
+        }
+        nav a {
+            transition: color 0.3s ease;
+        }
+        nav a:hover, nav a.active { /* Style for active link */
+            color: #F87171; 
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1F2937; }
+        ::-webkit-scrollbar-thumb { background: #4B5563; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6B7280; }
+        /* Ensure footer is at the bottom for single page */
+        html { height: 100%; }
+        body { min-height: 100%; display: flex; flex-direction: column; }
+        main { flex-grow: 1; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky top-0 left-0 right-0 z-50 py-4 px-6 bg-gray-900 bg-opacity-80 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-bold text-red-400">The Dieppe Raid</a>
+            <div class="space-x-4 text-sm md:text-base">
+                <a href="#mission" class="text-gray-300 hover:text-red-400">Mission</a>
+                <a href="#events" class="text-gray-300 hover:text-red-400">Events</a>
+                <a href="#outcome" class="text-gray-300 hover:text-red-400">Outcome</a>
+                <a href="#significance" class="text-gray-300 hover:text-red-400">Significance</a>
+                <a href="#team" class="text-gray-300 hover:text-red-400">Team</a>
+                <a href="#sources" class="text-gray-300 hover:text-red-400">Sources</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero-section section flex flex-col justify-center items-center text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight animate-fadeInUp">THE DIEPPE RAID</h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-fadeInUp animation-delay-300">August 19, 1942: A Fateful Day for Canada in WWII</p>
+            <a href="#mission" class="mt-8 px-8 py-3 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300 transform hover:scale-105 animate-fadeInUp animation-delay-600">
+                Discover the Story
+            </a>
+        </section>
+        
+        <div class="angled-divider-inverted"></div>
+
+        <section id="mission" class="section bg-gray-800">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12 text-red-400">The Mission</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-left p-6 bg-gray-900 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-semibold mb-4 text-red-300">Date & Location</h3>
+                        <p class="text-lg mb-6 text-gray-300">August 19, 1942, on the heavily fortified beaches of Dieppe, France.</p>
+                        
+                        <h3 class="text-2xl font-semibold mb-4 text-red-300">Objectives & Strategy</h3>
+                        <ul class="list-disc list-inside text-lg space-y-2 text-gray-300">
+                            <li>Test German coastal defenses and capture the port.</li>
+                            <li>Gather vital intelligence for future landings.</li>
+                            <li>Boost Allied morale and demonstrate capability.</li>
+                            <li>Divert German resources from the Eastern Front.</li>
+                            <li>Strategy: A frontal assault on the main port (Red and White beaches), supported by flanking attacks on Pourville (Green beach) and Puys (Blue beach), along with commando raids on artillery batteries.</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 bg-gray-900 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-semibold mb-4 text-center text-red-300">Planned Attack Routes</h3>
+                        <img src="https://placehold.co/600x400/374151/F3F4F6?text=Detailed+Map+Dieppe+Raid+Beaches+(Placeholder)" alt="Map of Dieppe Attack Plan" class="rounded-lg shadow-md mx-auto">
+                        <p class="text-sm mt-2 text-gray-400 text-center">Visual representation of the multi-pronged assault on Dieppe's beaches.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="angled-divider"></div>
+
+        <section id="events" class="section bg-gray-900">
+            <div class="container mx-auto">
+                <h2 class="text-4xl font-bold mb-16 text-center text-red-400">Key Events of the Raid</h2>
+                <div class="max-w-3xl mx-auto">
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-1 text-red-300">03:48 - Ill-fated Encounter</h3>
+                        <p class="text-gray-400">Landing craft carrying No. 3 Commando run into a small German coastal convoy. The ensuing firefight alerts German shore defenses prematurely.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-1 text-red-300">04:50 - Landings Begin</h3>
+                        <p class="text-gray-400">Troops begin landing. At Puys (Blue Beach), the Royal Regiment of Canada faces intense, accurate fire and suffers devastating casualties within minutes. At Pourville (Green Beach), the South Saskatchewan Regiment and Queen's Own Cameron Highlanders initially meet lighter resistance.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-1 text-red-300">05:20 - Main Assault</h3>
+                        <p class="text-gray-400">The main Canadian forces (Essex Scottish, Royal Hamilton Light Infantry) land on Red and White beaches in front of Dieppe. They are met with overwhelming machine gun and mortar fire. Tanks of the Calgary Regiment are delayed and struggle on the chert-stone beach.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-1 text-red-300">09:00 - Situation Critical</h3>
+                        <p class="text-gray-400">Most objectives are unmet. Communication breaks down. Tanks are largely ineffective, either destroyed or unable to penetrate town. Casualties mount rapidly.</p>
+                    </div>
+                     <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-1 text-red-300">11:00 - Withdrawal Order</h3>
+                        <p class="text-gray-400">With the situation untenable, the Force Commanders issue the order to withdraw. Evacuation under heavy fire proves extremely difficult and costly.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-semibold mb-1 text-red-300">14:00 - Raid Concludes</h3>
+                        <p class="text-gray-400">The last boats depart, leaving behind many dead, wounded, and those forced to surrender. The raid ends in a clear tactical defeat for the Allies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="angled-divider-inverted"></div>
+
+        <section id="outcome" class="section bg-gray-800">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12 text-red-400">The Outcome & Human Cost</h2>
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">The Dieppe Raid was a catastrophic failure in terms of its immediate objectives. The majority of the landing force was either killed, wounded, or captured.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="stat-card p-8 rounded-lg shadow-xl text-center bg-gray-900">
+                        <h3 class="text-5xl font-bold text-red-400 mb-3">907+</h3>
+                        <p class="text-xl text-gray-300">Canadians Killed</p>
+                        <p class="text-sm text-gray-500">(Including those who died of wounds)</p>
+                    </div>
+                    <div class="stat-card p-8 rounded-lg shadow-xl text-center bg-gray-900">
+                        <h3 class="text-5xl font-bold text-red-400 mb-3">1,946</h3>
+                        <p class="text-xl text-gray-300">Canadians Taken Prisoner</p>
+                         <p class="text-sm text-gray-500">(Nearly 40% of the Canadian force)</p>
+                    </div>
+                    <div class="stat-card p-8 rounded-lg shadow-xl text-center bg-gray-900">
+                        <h3 class="text-5xl font-bold text-red-400 mb-3">~2,210</h3>
+                        <p class="text-xl text-gray-300">Total Canadian Casualties (excluding POWs)</p>
+                        <p class="text-sm text-gray-500">(Killed, Wounded, Missing - numbers vary by source)</p>
+                    </div>
+                </div>
+                <p class="text-lg text-gray-400 mt-12 max-w-3xl mx-auto">Of the 4,963 Canadians who embarked for the raid, 3,367 became casualties (killed, wounded, or captured) – a casualty rate of nearly 68%.</p>
+            </div>
+        </section>
+
+        <div class="angled-divider"></div>
+
+        <section id="significance" class="section bg-gray-900">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12 text-red-400">Canada's Role & Enduring Significance</h2>
+                <div class="grid md:grid-cols-2 gap-12 items-start">
+                    <div class="text-left p-6 bg-gray-800 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-semibold mb-4 text-red-300">A Predominantly Canadian Force</h3>
+                        <p class="text-lg text-gray-300 mb-6">The Dieppe Raid was overwhelmingly a Canadian operation. Of the nearly 6,100 Allied troops involved in the main landings, almost 5,000 were Canadian soldiers from the 2nd Canadian Infantry Division. This immense contribution underscored Canada's commitment to the Allied war effort.</p>
+                        <img src="https://placehold.co/500x300/4B5563/F3F4F6?text=Canadian+Soldiers+2nd+Infantry+Division+WWII+(Placeholder)" alt="Canadian Soldiers in WWII" class="rounded-lg shadow-md mx-auto mb-4">
+                    </div>
+                    <div class="text-left p-6 bg-gray-800 rounded-lg shadow-xl">
+                        <h3 class="text-2xl font-semibold mb-4 text-red-300">Lessons Forged in Fire</h3>
+                        <p class="text-lg text-gray-300 mb-2">Despite the tragic losses, the Dieppe Raid provided invaluable, albeit harsh, lessons for the Allies:</p>
+                        <ul class="list-disc list-inside text-lg space-y-2 text-gray-300 mb-6">
+                            <li>The need for overwhelming firepower and specialized equipment for amphibious assaults.</li>
+                            <li>Improved intelligence and planning for landings on defended coasts.</li>
+                            <li>The importance of air superiority and naval bombardment.</li>
+                            <li>Better communication and coordination between land, sea, and air forces.</li>
+                        </ul>
+                        <p class="text-lg text-gray-300">These lessons were crucial in the planning and successful execution of later Allied landings, most notably D-Day in Normandy in 1944.</p>
+                    </div>
+                </div>
+                 <p class="text-xl text-gray-300 mt-12 max-w-4xl mx-auto">The sacrifice at Dieppe remains a somber and significant chapter in Canadian military history, a testament to bravery in the face of overwhelming odds, and a hard-won step on the path to Allied victory.</p>
+            </div>
+        </section>
+
+        <div class="angled-divider-inverted"></div>
+        
+        <section id="team" class="section bg-gray-800">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12 text-red-400">Project Contributors</h2>
+                <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">This historical showcase was compiled by a dedicated team, with each member focusing on specific aspects of the Battle of Dieppe.</p>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://placehold.co/150x150/4B5563/F3F4F6?text=Team+Member+1" alt="Team Member 1" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-red-400">
+                        <h3 class="text-xl font-semibold text-red-300">Student Name 1</h3>
+                        <p class="text-gray-400">Date/Location & Objectives/Strategies</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://placehold.co/150x150/4B5563/F3F4F6?text=Team+Member+2" alt="Team Member 2" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-red-400">
+                        <h3 class="text-xl font-semibold text-red-300">Student Name 2</h3>
+                        <p class="text-gray-400">Key Events & Points of the Battle</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://placehold.co/150x150/4B5563/F3F4F6?text=Team+Member+3" alt="Team Member 3" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-red-400">
+                        <h3 class="text-xl font-semibold text-red-300">Student Name 3</h3>
+                        <p class="text-gray-400">Outcome & Canadian Casualties</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300">
+                        <img src="https://placehold.co/150x150/4B5563/F3F4F6?text=Team+Member+4" alt="Team Member 4" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-red-400">
+                        <h3 class="text-xl font-semibold text-red-300">Student Name 4</h3>
+                        <p class="text-gray-400">Canada's Role/Contributions & Significance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="angled-divider"></div>
+
+        <section id="sources" class="section bg-gray-900">
+            <div class="container mx-auto text-center">
+                <h2 class="text-4xl font-bold mb-12 text-red-400">Works Cited</h2>
+                <div class="text-left max-w-2xl mx-auto bg-gray-800 p-8 rounded-lg shadow-xl">
+                    <p class="text-lg text-gray-300 mb-4">All information presented has been sourced from reputable historical accounts and archives. Please list your sources in MLA format below:</p>
+                    <ul class="list-disc list-inside space-y-3 text-gray-400">
+                        <li>Author Last Name, First Name. <em>Title of Book</em>. Publisher, Year of Publication.</li>
+                        <li>"Title of Web Page." <em>Name of Website</em>, Publisher or Sponsoring Organization, Date of Publication or Update, URL. Accessed Date.</li>
+                        <li>(Placeholder for more sources)</li>
+                         <li>(Ensure to replace these placeholders with your actual citations)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-8 bg-gray-900 border-t border-gray-700 text-center">
+        <p class="text-gray-500">&copy; <span id="currentYear"></span> Dieppe Raid Historical Project. All Rights Reserved.</p>
+        <p class="text-xs text-gray-600 mt-1">A tribute to the courage and sacrifice of those who served.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Intersection Observer for section and timeline animations
+            const animatedElements = document.querySelectorAll('.section, .timeline-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Stagger timeline items slightly more than general sections
+                        const delay = entry.target.classList.contains('timeline-item') ? index * 150 : index * 50;
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, delay);
+                        // observer.unobserve(entry.target); // Optional: unobserve after first animation
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the element is visible
+            animatedElements.forEach(el => observer.observe(el));
+
+            // Hero elements animation
+            const heroElements = document.querySelectorAll('.animate-fadeInUp');
+            heroElements.forEach((el) => {
+                const delay = el.classList.contains('animation-delay-300') ? 300 : (el.classList.contains('animation-delay-600') ? 600 : 0);
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = `opacity 0.5s ease-out ${delay}ms, transform 0.5s ease-out ${delay}ms`;
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 50 + delay);
+            });
+
+            // Smooth scrolling for navigation links & active link highlighting
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const navbarHeight = document.querySelector('nav').offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - navbarHeight;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Active link highlighting on scroll
+            const sectionsForNav = document.querySelectorAll('section[id]'); // Get all sections with an ID
+            window.addEventListener('scroll', () => {
+                let current = '';
+                const navbarHeight = document.querySelector('nav').offsetHeight;
+
+                sectionsForNav.forEach(section => {
+                    const sectionTop = section.offsetTop - navbarHeight - 50; // Adjusted offset
+                    if (pageYOffset >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active', 'text-red-400', 'font-semibold');
+                    link.classList.add('text-gray-300');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active', 'text-red-400', 'font-semibold');
+                        link.classList.remove('text-gray-300');
+                    }
+                });
+                 // Handle hero section specifically for initial load and top scroll
+                if (window.pageYOffset < sectionsForNav[0].offsetTop - navbarHeight - 50) {
+                     navLinks.forEach(link => {
+                        link.classList.remove('active', 'text-red-400', 'font-semibold');
+                        link.classList.add('text-gray-300');
+                     });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
